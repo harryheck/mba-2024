@@ -5,7 +5,7 @@
         {name: 'Projects', link: '#projects'},
         {name: 'Services', link: '#services'},
         {name: 'About', link: '#about'},
-        {name: 'Contact', link: '#contact'},
+        //{name: 'Contact', link: '#contact'},
         //{name: 'Blog', link: '#blog'}
 
     ];
