@@ -26,7 +26,18 @@
 				console.log('callback - particles.js config loaded');
 			  });
 		</script>
-		<script type="module" src="cookieconsent-config.js"></script>
+
+		<GdprBanner cookieName="foo" description="bar" on:analytics={initAnalytics} />
+
+		<script>
+			//import '@beyonk/gdpr-cookie-consent-banner/banner.css' // optional, you can also define your own styles
+			import GdprBanner from '@beyonk/gdpr-cookie-consent-banner'
+		  
+			function initAnalytics () {
+			  // do something with segment.io or google analytics etc
+			}
+		  </script>
+
 	</body>
 
 </html>

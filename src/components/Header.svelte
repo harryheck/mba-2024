@@ -16,9 +16,6 @@
         y > 0 ? 'py-4 bg-slate-950 border-violet-950' : 'py-6 bg-transparent border-transparent'
     )}>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.0/dist/cookieconsent.css">
-
-
     <h1 class="font-medium">
         <b class="font-bold poppins">Roman</b> <span class="">Schweikert</span>
     </h1> 
@@ -27,6 +24,11 @@
         {#each tabs as tab, index}
         <a
             href={tab.link}
+            on:click={(event) => {
+                event.preventDefault();
+                const target = document.querySelector(tab.link);
+                target.scrollIntoView({ behavior: 'smooth' });
+            }}
             class="duration-200 hover:text-violet-400"
             >
             <p>{tab.name}</p>

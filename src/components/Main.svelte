@@ -135,7 +135,7 @@
                 <h3>A bit <span class="poppins text-violet-400">about</span> me.
                 </h3>
             </div>
-            <p class="mx-auto poppins font-semibold text-lg sm:text-xl md:text-2xl">I am . . . </p>
+            <p class="mx-auto poppins font-semibold text-lg sm:text-2xl md:text-3xl">I am . . . </p>
             <div class="flex flex-col gap-20 w-full mx-auto max-w-[800px]">
                 {#each benefits as benefit, index}
                 <div class="flex gap-6 sm:gap-8">
@@ -160,17 +160,73 @@
         <h3 class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center">
             Get in touch
         </h3>
-        <div class="flex flex-col gap-4 items-center justify-center">
 
-            <form class="flex flex-col gap-4 items-center w-full max-w-md">
-                <div class="flex gap-4">
-                    <input type="text" placeholder="First Name" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-                    <input type="text" placeholder="Last Name" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
+
+ <div class="flex items-center">
+        <div class="container mx-auto">
+            <div class="max-w-md mx-auto bg-gray-800 p-5 rounded-md shadow-sm">
+                <div class="text-center">
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Fill up the form below to send me a message.
+                    </p>
                 </div>
-                <input type="email" placeholder="Email" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-                <input type="text" placeholder="Subject" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-                <textarea placeholder="Message" class="px-4 py-2 border border-solid border-gray-300 rounded w-full h-40 text-black"></textarea>
-                <script>
+                <div class="m-7">
+                    <form action="https://api.web3forms.com/submit" method="POST" id="form">
+                        <input type="hidden" name="access_key" value="6aa7cafe-bc6a-44d2-bca6-f43b47815c9e" />
+                        <input type="hidden" name="subject" value="New Submission from Web3Forms" />
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+                        <input type="checkbox" name="botcheck" id="" style="display: none;" />
+                        <div class="mb-6">
+                            <label for="name" class="block mb-2 font-medium text-sm text-gray-600 dark:text-gray-400">Full Name</label>
+                            <input type="text" name="name" id="name" placeholder="John Doe" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block mb-2 font-medium text-sm text-gray-600 dark:text-gray-400">Email Address</label>
+                            <input type="email" name="email" id="email" placeholder="your@email.com" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 font-medium text-sm text-gray-600 dark:text-gray-400">Your Message</label>
+    
+                            <textarea rows="5" name="message" id="message" placeholder="Your Message" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" required></textarea>
+                        </div>
+                        <div class="mb-6">
+                            <button type="submit" class="w-full px-3 py-4 text-white bg-violet-700 rounded-md focus:bg-indigo-600 focus:outline-none">
+                                Send Message
+                            </button>
+                        </div>
+                        <p class="text-base text-center text-gray-400" id="result"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+        <!--<div class="flex flex-col gap-4 items-center justify-evenly">
+
+            <form 
+                class="flex flex-col gap-4 items-center w-full max-w-md"
+                action="https://api.web3forms.com/submit" method="POST"
+                    >
+
+                    <input type="hidden" name="access_key" value="6aa7cafe-bc6a-44d2-bca6-f43b47815c9e
+                    ">
+
+            <div class="flex gap-4">
+                <input type="text" placeholder="First Name" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
+                <input type="text" placeholder="Last Name" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
+            </div>
+            <input type="email" placeholder="Email" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
+            <input type="text" placeholder="Subject" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
+            <textarea placeholder="Message" class="px-4 py-2 border border-solid border-gray-300 rounded w-full h-40 text-black"></textarea>
+            <script>
 
                 </script>
                 <button type="submit" class="px-4 py-2 bg-violet-400 text-white rounded" on:click={sendEmail}>Submit</button>
@@ -178,7 +234,7 @@
             </form>
 
                             
-
+-->
         </section>
 
 </main>
