@@ -1,3 +1,7 @@
+# Roman Schweikert's Portfolio of 2024
+
+If you've come this far, you must have been determined!
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
