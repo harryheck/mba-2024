@@ -2,25 +2,65 @@
     export let y;
 
     let tabs = [
-        {name: 'Projects', link: '#projects'},
-        {name: 'Services', link: '#services'},
+        {name: 'Music', link: '#music'},
+        {name: 'Live', link: '#live'},
         {name: 'About', link: '#about'},
-        //{name: 'Contact', link: '#contact'},
+        //{name: 'Merch', link: '#merch'}
         //{name: 'Blog', link: '#blog'}
 
     ];
+
+    function goTop() {
+        document.body.scrollIntoView({ behavior: 'smooth' });
+    }
 </script>
 
 <header 
-    class={'sticky z-[10] top-0 duration-200 px-6 flex items-center justify-between border border-solid ' + ( 
-        y > 0 ? 'py-4 bg-slate-950 border-violet-950' : 'py-6 bg-transparent border-transparent'
+    class={'sticky z-[10] top-0 duration-300 px-6 flex border border-solid w-auto ' + ( 
+        y > 0 ? 'py-4 bg-gray-950 bg-opacity-95 border-transparent' : 'py-4 bg-gray-950 bg-opacity-50 border-transparent'
     )}>
+    <button
+        on:click={goTop}
+        class="font-poppins relative text-2xl md:text-3xl uppercase duration-200 hover:text-blue-400">
+        <b>My Best Antic</b>
+    </button>
 
-    <h1 class="font-medium">
-        <b class="font-bold poppins">Roman</b> <span class="">Schweikert</span>
-    </h1> 
+    <div class="flex ml-auto items-center gap-2 md:gap-3 lg:gap-5 text 2xl md:3xl">
+        <a
+            href="https://www.instagram.com/mybestantic/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-instagram fa-2x hover:text-pink-400 duration-200"></i>
+        </a>
 
-    <div class="sm:flex ml-auto pr-4 items-center gap-4 hidden">
+        <a
+            href="https://www.youtube.com/@mybestantic"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-youtube fa-2x hover:text-red-400 duration-200"></i>
+        </a>
+
+        <a
+            href="https://www.threads.net/@mybestantic"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-threads fa-2x hover:text-gray-400 duration-200"></i>
+        </a>
+
+        <a
+            href="https://www.facebook.com/mybestantic"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="fab fa-facebook fa-2x hover:text-blue-400 duration-200"></i>
+        </a>
+    </div>
+
+
+    <div class="font-poppins sm:flex ml-auto items-center gap-4 font-semibold md:text-2xl sm:text-xl uppercase">
         {#each tabs as tab, index}
         <a
             href={tab.link}
@@ -29,24 +69,11 @@
                 const target = document.querySelector(tab.link);
                 target.scrollIntoView({ behavior: 'smooth' });
             }}
-            class="duration-200 hover:text-violet-400"
+            class="duration-200 hover:text-blue-400"
             >
             <p>{tab.name}</p>
         </a>
         {/each}
     </div>
 
-
-    <button 
-        on:click={() => {
-            const contactSection = document.getElementById('contact');
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }}
-        class="blueShadow relative overflow-hidden px-5 py-2 group rounded-full bg-white text-slate-950"
-    >
-        <div
-            class="absolute top-0 right-full w-full h-full bg-violet-400 opacity-30 group-hover:translate-x-full z-0 duration-300"
-        />
-        <h4 class="relative z-9">Get in touch</h4>
-    </button>
 </header>
