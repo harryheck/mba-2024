@@ -10,6 +10,7 @@
   function goTop() {
     document.body.scrollIntoView({ behavior: 'smooth' });
   }
+  
 </script>
 
 <div
@@ -17,14 +18,14 @@
   sm:text-base min-h-screen"
 >
   <div
-    class={"fixed bottom-0 w-full duration-200 flex p-10 z-[10] " +
+    class={"fixed bottom-0 w-full duration-200 flex p-10 z-[10]" +
       (y > 0
         ? "opacity-full pointer-events-auto "
         : "pointer-events-none opacity-0 ")}
   >
     <button
       on:click={goTop}
-      class="ml-auto rounded-full bg-gray-900 text-blue-400 px-3 sm:px-4 hover:bg-slate-800 cursor-pointer"
+      class="ml-auto rounded-full bg-gray-900 text-blue-300 px-3 sm:px-4 hover:bg-slate-800 cursor-pointer text-base md:text-xl lg:text-2xl"
     >
       <i class="fa-solid fa-arrow-up grid place-items-center aspect-square" />
     </button>
