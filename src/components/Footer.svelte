@@ -1,10 +1,16 @@
 <script>
-    import Modal from "./Modal.svelte";
+    /** import Modal from "./ModalOld.svelte"; */
+    import Modal from './Modal.svelte'
 
     import Component1 from './Component1.svelte'
 	import Component2 from './Component2.svelte'
 
     let showModal = false;
+	let modalContent;
+    function toggleModal(component) {
+		modalContent = component;
+		showModal = !showModal;
+	}
 </script>
 
 <footer
@@ -53,11 +59,39 @@
             ></i>
         </a>
     </div>
-    <p class="text-base shadow-xl">
+
+    <div class="flex">
+        <button 
+            class="bg-transparent text-white rounded-md px-2 py-2 hover:bg-blue-700 transition"
+            on:click={() => (toggleModal(Component1))}
+        >
+            Impressum
+        </button>
+        <button 
+            class="bg-transparent text-white rounded-md px-2 py-2 hover:bg-blue-700 transition"
+            on:click={() => (toggleModal(Component2))}
+        >
+            Datenschutzerklärung
+        </button>
+    </div>
+    
+    {#if showModal}
+        <Modal on:click={toggleModal} {modalContent} />
+    {/if}
+    
+    <p class="text-xs shadow-xl">
         <i class="fa-regular fa-copyright"></i>
         My Best Antic 2024 🤍
     </p>
 
+    
+    
+
+    
+    
+    
+    
+    <!-- 
     <button 
     class="bg-transparent text-white rounded-md px-4 py-2 hover:bg-blue-700 transition"
     on:click={() => (showModal = true)}>Impressum</button>
@@ -164,6 +198,8 @@
             awdawaw
         </div>
     </Modal>
+
+    -->
 </footer>
 
 
