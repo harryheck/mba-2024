@@ -62,7 +62,7 @@
     <section id="music" class="py-32 flex flex-col gap-20">
         <div class="flex flex-col gap-2 text-center">
             <h3
-                class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
+                class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
             >
                 Music
             </h3>
@@ -134,7 +134,7 @@
         class="py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 my-auto"
     >
         <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
+            class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
         >
             Live
         </h3>
@@ -250,7 +250,7 @@
         class="py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 mx-auto w-full max-w-[1400px]"
     >
         <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
+            class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
         >
             About
         </h3>
@@ -275,7 +275,7 @@
 
     <section id="contact" class="py-32 flex flex-col gap-20">
         <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
+            class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
         >
             Contact
         </h3>
