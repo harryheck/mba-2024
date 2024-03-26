@@ -79,7 +79,7 @@
         <Modal on:click={toggleModal} {modalContent} />
     {/if}
     
-    <p class="text-xs shadow-xl">
+    <p class="text-sm shadow-xl">
         <i class="fa-regular fa-copyright"></i>
         My Best Antic 2024 🤍
     </p>

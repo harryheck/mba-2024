@@ -23,13 +23,13 @@
 >
     <button
         on:click={goTop}
-        class="font-poppins text-2xl md:text-3xl uppercase duration-200 hover:text-blue-400"
+        class="font-poppins text-xl md:text-2xl uppercase duration-200 hover:text-blue-400"
     >
         <b>My Best Antic</b>
     </button>
 
     <div
-        class="hidden lg:flex ml-auto gap-2 md:gap-3 lg:gap-5 text xl md:2xl"
+        class="hidden md:flex ml-auto gap-0 md:gap-3 lg:gap-5 font-semibold sm:text-sm md:text-sm"
     >
         <a
             href="https://www.instagram.com/mybestantic/"
@@ -68,7 +68,7 @@
     </div>
 
     <div
-        class="font-poppins sm:flex ml-auto items-center gap-4 font-semibold md:text-2xl sm:text-xl uppercase"
+        class="font-poppins sm:flex ml-auto items-center gap-4 font-semibold md:text-xl  uppercase"
     >
         {#each tabs as tab, index}
             <a
