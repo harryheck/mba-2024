@@ -1,6 +1,8 @@
 <script>
     import Step from "./Step.svelte";
 
+    import { fade } from "svelte/transition";
+
     let steps = [
         { name: "Mixing", icon: "fa-solid fa-wave-square" },
         { name: "Recording", icon: "fa-solid fa-microphone-lines" },
@@ -26,26 +28,53 @@
     ];
 </script>
 
-<main class="relative py-6 lg:py-12 flex flex-col gap-14 sm:gap-20 md:gap-24 my-auto">
-    <section id="introPage" class="h-screen">
-        <!-- Your intro content here -->
+<main class="relative flex flex-col overflow-hidden">
+    <section id="introPage" class="inset-0 min-h-screen z-[-10] border-b border-solid border-blue-950">
+        <img
+            class="inset-0 w-full h-full bg-auto min-h-screen object-cover"
+            src="images/bg.jpg"
+            alt="bg"
+        />
+        <div class="svg hidden">
+            <svg>
+                <filter id="noiseFilter">
+                    <feTurbulence
+                        type="fractalNoise"
+                        baseFrequency="0.6"
+                        stitchTiles="stitch"
+                    />
+                    <feColorMatrix
+                        in="colorNoise"
+                        type="matrix"
+                        values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"
+                    />
+                    <feComposite
+                        operator="in"
+                        in2="SourceGraphic"
+                        result="monoNoise"
+                    />
+                    <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
+                </filter>
+            </svg>
+        </div>
     </section>
-    <section id="music" class="py-32 flex flex-col gap-20 z-10">
+
+    <section id="music" class="py-32 flex flex-col gap-20">
         <div class="flex flex-col gap-2 text-center">
             <h3
-                class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center"
+                class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
             >
                 Music
             </h3>
             <!--
             <h6 class="text-large sm:text-1xl md:text-2xl">
-                A few of my recent works.
+                A few of our recent songs.
             </h6>
             -->
         </div>
 
         <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 items-center justify-center mx-auto"
+            class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 items-center mx-auto"
         >
             <iframe
                 title="Spotify Player"
@@ -100,29 +129,107 @@
         </a>
     </section>
 
-    <section id="live" class="py-6 lg:py-12 flex flex-col gap-14 sm:gap-20 md:gap-24 my-auto">
+    <section
+        id="live"
+        class="py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 my-auto"
+    >
         <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center"
+            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
         >
             Live
-        </h3>  
-        <!-- svelte-ignore a11y-missing-content -->
-        <a
-            href="https://www.songkick.com/artists/8379038"
-            class="songkick-widget"
-            data-theme="dark"
-            data-track-button="off"
-            data-detect-style="on"
-            data-locale="de"
-            data-other-artists="on"
-            data-share-button="off"
-            data-country-filter="on"
-            data-rsvp="on"
-            data-request-show="off"
-            data-past-events="off"
-            data-past-events-offtour="off"
-            data-remind-me="off"
-        ></a><script src="//widget-app.songkick.com/injector/8379038"></script>
+        </h3>
+
+        <div class="w-full mx-auto max-w-[1400px] items-center">
+            <script
+                charset="utf-8"
+                src="https://widgetv3.bandsintown.com/main.min.js"
+            ></script>
+            <a
+                class="bit-widget-initializer"
+                href="/foo"
+                data-artist-name="id_10560649"
+                data-background-color="rgba(2,6,23,1)"
+                data-separator-color="rgba(159,159,159,1)"
+                data-text-color="rgba(255,255,255,1)"
+                data-font="Poppins"
+                data-auto-style="true"
+                data-button-label-capitalization="capitalize"
+                data-header-capitalization="undefined"
+                data-location-capitalization="capitalize"
+                data-venue-capitalization="capitalize"
+                data-local-dates-position=""
+                data-display-details="true"
+                data-display-lineup="true"
+                data-display-start-time="true"
+                data-social-share-icon="false"
+                data-display-limit="5"
+                data-date-format="MMM. DD YYYY"
+                data-date-orientation="vertical"
+                data-date-border-color="#4A4A4A"
+                data-date-border-width="0px"
+                data-date-capitalization="uppercase"
+                data-date-border-radius="200px"
+                data-event-ticket-cta-size="medium"
+                data-event-custom-ticket-text=""
+                data-event-ticket-text="TICKETS"
+                data-event-ticket-icon="true"
+                data-event-ticket-cta-text-color="#FFFFFF"
+                data-event-ticket-cta-bg-color="#1d4ed8"
+                data-event-ticket-cta-border-color="#4A4A4A"
+                data-event-ticket-cta-border-width="0px"
+                data-event-ticket-cta-border-radius="4px"
+                data-sold-out-button-text-color="#FFFFFF"
+                data-sold-out-button-background-color="#4A4A4A"
+                data-sold-out-button-border-color="#4A4A4A"
+                data-sold-out-button-clickable="true"
+                data-event-rsvp-position="left"
+                data-event-rsvp-cta-size="medium"
+                data-event-rsvp-only-show-icon="undefined"
+                data-event-rsvp-text="REMIND ME"
+                data-event-rsvp-icon=""
+                data-event-rsvp-cta-text-color="#4A4A4A"
+                data-event-rsvp-cta-bg-color="#FFFFFF"
+                data-event-rsvp-cta-border-color="#4A4A4A"
+                data-event-rsvp-cta-border-width="1px"
+                data-event-rsvp-cta-border-radius="4px"
+                data-follow-section-position="hidden"
+                data-follow-section-alignment="center"
+                data-follow-section-header-text="Get updates on new shows, new music, and more."
+                data-follow-section-cta-size="medium"
+                data-follow-section-cta-text="FOLLOW"
+                data-follow-section-cta-icon="true"
+                data-follow-section-cta-text-color="#FFFFFF"
+                data-follow-section-cta-bg-color="#4A4A4A"
+                data-follow-section-cta-border-color="#4A4A4A"
+                data-follow-section-cta-border-width="0px"
+                data-follow-section-cta-border-radius="4px"
+                data-play-my-city-position="hidden"
+                data-play-my-city-alignment="Center"
+                data-play-my-city-header-text="Don’t see a show near you?"
+                data-play-my-city-cta-size="medium"
+                data-play-my-city-cta-text="REQUEST A SHOW"
+                data-play-my-city-cta-icon="true"
+                data-play-my-city-cta-text-color="#FFFFFF"
+                data-play-my-city-cta-bg-color="#4A4A4A"
+                data-play-my-city-cta-border-color="#4A4A4A"
+                data-play-my-city-cta-border-width="0px"
+                data-play-my-city-cta-border-radius="4px"
+                data-optin-font=""
+                data-optin-text-color=""
+                data-optin-bg-color=""
+                data-optin-cta-text-color=""
+                data-optin-cta-bg-color=""
+                data-optin-cta-border-width=""
+                data-optin-cta-border-radius=""
+                data-optin-cta-border-color=""
+                data-language="en"
+                data-layout-breakpoint="900"
+                data-app-id=""
+                data-affil-code=""
+                data-bit-logo-position="hidden"
+                data-bit-logo-color="#CCCCCC"
+            ></a>
+        </div>
     </section>
 
     <!--
@@ -140,14 +247,16 @@
 
     <section
         id="about"
-        class="py-20 lg:py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 mx-auto w-full max-w-[1400px]"
+        class="py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 mx-auto w-full max-w-[1400px]"
     >
         <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center"
+            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
         >
             About
         </h3>
-        <div class="flex flex-col gap-4 relative before:absolute before:top-0 m-auto">
+        <div
+            class="flex flex-col gap-4 relative before:absolute before:top-0 m-auto"
+        >
             <h6 class="text-center sm:text-xl md:text-2xl leading-5">
                 Aufgewachsen in den goldenen Jahren des Pop-Punk und
                 Post-Hardcore haben My Best Antic ihre Liebe für kraftvolle und
@@ -163,14 +272,15 @@
             </h6>
         </div>
     </section>
-    <section id="contact" class="py-20 lg:py-32 flex flex-col gap-20">
+
+    <section id="contact" class="py-32 flex flex-col gap-20">
         <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center"
+            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center uppercase"
         >
-            Get in touch
+            Contact
         </h3>
 
-        <div class="flex items-center">
+        <div class="flex items-start">
             <div class="container mx-auto">
                 <div
                     class="max-w-md mx-auto bg-gray-800 p-5 rounded-md shadow-sm"
@@ -270,32 +380,5 @@
                 </div>
             </div>
         </div>
-
-        <!--<div class="flex flex-col gap-4 items-center justify-evenly">
-
-            <form 
-                class="flex flex-col gap-4 items-center w-full max-w-md"
-                action="https://api.web3forms.com/submit" method="POST"
-                    >
-
-                    <input type="hidden" name="access_key" value="6aa7cafe-bc6a-44d2-bca6-f43b47815c9e
-                    ">
-
-            <div class="flex gap-4">
-                <input type="text" placeholder="First Name" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-                <input type="text" placeholder="Last Name" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-            </div>
-            <input type="email" placeholder="Email" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-            <input type="text" placeholder="Subject" class="px-4 py-2 border border-solid border-gray-300 rounded w-full text-black" />
-            <textarea placeholder="Message" class="px-4 py-2 border border-solid border-gray-300 rounded w-full h-40 text-black"></textarea>
-            <script>
-
-                </script>
-                <button type="submit" class="px-4 py-2 bg-blue-400 text-white rounded" on:click={sendEmail}>Submit</button>
-            
-            </form>
-
-                            
--->
     </section>
 </main>
