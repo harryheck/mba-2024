@@ -2,6 +2,7 @@
     import Step from "./Step.svelte";
 
     import { fade } from "svelte/transition";
+    //import "@fontsource/poppins";
 
     let steps = [
         { name: "Mixing", icon: "fa-solid fa-wave-square" },
