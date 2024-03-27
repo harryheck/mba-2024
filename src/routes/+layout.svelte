@@ -1,8 +1,9 @@
 <script>
+  import "@fontsource/poppins";
   import "../app.css";
   import Footer from "../components/Footer.svelte";
   import Header from "../components/Header.svelte";
-
+  
   let y;
   let innerHeight = 0;
   let innerWidth = 0;
@@ -12,6 +13,7 @@
   }
   
 </script>
+
 
 <div
   class="font-poppins relative flex flex-col max-w-[screen] mx-auto w-full text-sm

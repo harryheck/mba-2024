@@ -9,6 +9,8 @@
 	},
 	"devDependencies": {
 		"@beyonk/gdpr-cookie-consent-banner": "^12.1.0",
+		"@fontsource/poppins": "^5.0.12",
+		"@fontsource/roboto": "^5.0.12",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",

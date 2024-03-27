@@ -29,7 +29,7 @@
     </button>
 
     <div
-        class="hidden md:flex ml-auto gap-0 md:gap-3 lg:gap-5 font-semibold sm:text-sm md:text-sm"
+        class="hidden md:grid md:grid-cols-4 ml-auto place-items-center gap-0 md:gap-2 lg:gap-5 font-semibold sm:text-sm md:text-sm"
     >
         <a
             href="https://www.instagram.com/mybestantic/"
