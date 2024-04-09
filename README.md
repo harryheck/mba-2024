@@ -1,6 +1,9 @@
-# Roman Schweikert's Portfolio of 2024
+# My Best Antic - New Website 2024
+
+Built with SvelteKit, TailwindCSS, FontAwesome, GoogleFonts, CookieYes etc.
 
 If you've come this far, you must have been determined!
+
 
 # create-svelte
 
