@@ -1,4 +1,4 @@
-# My Best Antic - New Website 2024
+# My Best Antic - new website 2025
 
 Built with SvelteKit, TailwindCSS, FontAwesome, GoogleFonts, CookieYes etc.
 
