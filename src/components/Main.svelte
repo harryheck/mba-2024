@@ -22,7 +22,6 @@
     ];
 </script>
 
-<!-- Noise Texture für "Grainy" Look -->
 <div class="bg-noise"></div>
 
 <!-- Background Orbs -->
@@ -33,19 +32,12 @@
 
     <!-- HERO SECTION -->
     <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative overflow-hidden">
-        
-        <!-- Live Image Background mit Overlay -->
         <div class="absolute inset-0 z-0">
-            <!-- 
-               Wichtig: Stelle sicher, dass 'bg.jpg' unter static/images/bg.jpg liegt.
-               Die Klasse 'mix-blend-overlay' sorgt dafür, dass das Bild mit dem dunklen Hintergrund verschmilzt.
-            -->
             <img 
                 src="images/bg.jpg" 
                 alt="My Best Antic Live" 
                 class="w-full h-full object-cover opacity-40 mix-blend-overlay grayscale hover:grayscale-0 transition-all duration-[3s] scale-105"
             />
-            <!-- Gradient Overlay für Lesbarkeit -->
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/30"></div>
         </div>
 
@@ -95,7 +87,6 @@
                 {/each}
             </div>
 
-            <!-- Streaming Links Leiste -->
             <div class="flex flex-col items-center gap-6 mt-12">
                 <p class="text-slate-400 uppercase tracking-widest text-sm">Stream us on</p>
                 <div class="flex flex-wrap justify-center gap-6 md:gap-10">
@@ -159,19 +150,20 @@
             
             <h2 class="text-3xl md:text-5xl font-bold mb-8 text-center uppercase text-white">About Us</h2>
             
-            <p class="text-lg md:text-xl text-slate-300 leading-relaxed text-justify hyphens-auto">
+            <!-- FIX: hyphens-auto entfernt -->
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed text-justify">
                 Aufgewachsen in den goldenen Jahren des Pop-Punk und Post-Hardcore haben <strong class="text-white">My Best Antic</strong> ihre Liebe für kraftvolle und emotionale Musik gefunden und seitdem nie verloren. Die vier Jungs aus Dresden schreiben sich den Frust des Lebens mit mitreißenden Gitarrenriffs, packenden Rhythmen und melodisch-zweistimmigem Gesang von der Seele und erzeugen damit einen Sound, der mal zum Tanzen und mal zum Nachdenken anregt. „My Best Antic“ - eben die beste Posse des Quartetts - steckt voller Zynismus, Kitsch, befreiender Wut und Hoffnung.
             </p>
         </div>
     </section>
 
-    <!-- CONTACT SECTION (E-Mail only) -->
+    <!-- CONTACT SECTION -->
     <section id="contact" class="py-32 px-4 mb-20 relative z-10">
         <div class="max-w-2xl mx-auto w-full text-center flex flex-col items-center gap-10">
             <h2 class="text-4xl md:text-6xl font-bold mb-4 uppercase text-white">Contact</h2>
             
             <p class="text-slate-400 text-lg md:text-xl max-w-lg">
-                Booking, Fragen oder einfach nur "Was geht" sagen? <br>
+                Booking, Fragen oder einfach nur <i>Hallöle</i> sagen? <br>
                 Schreib uns direkt eine Mail.
             </p>
 
