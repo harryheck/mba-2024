@@ -1,385 +1,193 @@
 <script>
-    import Step from "./Step.svelte";
+    import { fly } from "svelte/transition";
+    import { onMount } from "svelte";
+    
+    let mounted = false;
+    onMount(() => {
+        mounted = true;
+    });
 
-    import { fade } from "svelte/transition";
-    //import "@fontsource/poppins";
-
-    let steps = [
-        { name: "Mixing", icon: "fa-solid fa-wave-square" },
-        { name: "Recording", icon: "fa-solid fa-microphone-lines" },
-        { name: "Songwriting", icon: "fa-solid fa-pencil" },
+    let spotifyLinks = [
+        "https://open.spotify.com/embed/track/7zhfeA51E1vBA6PiTmP8et?utm_source=generator&theme=0",
+        "https://open.spotify.com/embed/track/4yfRbpAzcvHERqcvgB11Jz?utm_source=generator&theme=0",
+        "https://open.spotify.com/embed/track/5lub0KpCOpCKeiviwZl9wd?utm_source=generator&theme=0"
     ];
 
-    let benefits = [
-        {
-            name: "a musician at core",
-            description:
-                "From composing heartfelt melodies to sculpting intricate soundscapes, my goal is always the same: to transport listeners to new worlds, stir their emotions, and leave them craving more.",
-        },
-        {
-            name: "a highly capable mixing engineer",
-            description:
-                "From composing heartfelt melodies to sculpting intricate soundscapes, my goal is always the same: to transport listeners to new worlds, stir their emotions, and leave them craving more.",
-        },
-        {
-            name: "an overall cool guy",
-            description:
-                "From composing heartfelt melodies to sculpting intricate soundscapes, my goal is always the same: to transport listeners to new worlds, stir their emotions, and leave them craving more.",
-        },
+    let streamingLinks = [
+        { name: 'Spotify', icon: 'fa-brands fa-spotify', url: 'https://open.spotify.com/artist/69HQoBBRhfFiSVKpjxFOKZ', color: 'hover:text-green-500' },
+        { name: 'Apple Music', icon: 'fa-brands fa-apple', url: 'https://music.apple.com/us/artist/my-best-antic/1112963926', color: 'hover:text-pink-500' },
+        { name: 'Deezer', icon: 'fa-brands fa-deezer', url: 'https://www.deezer.com/en/artist/10345832', color: 'hover:text-purple-500' },
+        { name: 'Tidal', icon: 'fa-solid fa-gem', url: 'https://tidal.com/artist/9907729', color: 'hover:text-white' }, 
+        { name: 'Amazon Music', icon: 'fa-brands fa-amazon', url: 'https://www.amazon.de/music/player/artists/B01FJ2AH60/my-best-antic', color: 'hover:text-blue-400' }
     ];
 </script>
 
-<main class="relative flex flex-col overflow-hidden">
-    <section id="introPage" class="inset-0 min-h-screen z-[-10] border-b border-solid border-blue-950">
-        <img
-            class="inset-0 w-full h-full bg-auto min-h-screen object-cover"
-            src="images/bg.jpg"
-            alt="bg"
-        />
-        <div class="svg hidden">
-            <svg>
-                <filter id="noiseFilter">
-                    <feTurbulence
-                        type="fractalNoise"
-                        baseFrequency="0.6"
-                        stitchTiles="stitch"
-                    />
-                    <feColorMatrix
-                        in="colorNoise"
-                        type="matrix"
-                        values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"
-                    />
-                    <feComposite
-                        operator="in"
-                        in2="SourceGraphic"
-                        result="monoNoise"
-                    />
-                    <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
-                </filter>
-            </svg>
-        </div>
-    </section>
+<!-- Noise Texture für "Grainy" Look -->
+<div class="bg-noise"></div>
 
-    <section id="music" class="py-32 flex flex-col gap-20">
-        <div class="flex flex-col gap-2 text-center">
-            <h3
-                class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
-            >
-                Music
-            </h3>
-            <!--
-            <h6 class="text-large sm:text-1xl md:text-2xl">
-                A few of our recent songs.
-            </h6>
+<!-- Background Orbs -->
+<div class="orb bg-blue-600 top-[-10%] left-[-10%] w-[50vw] h-[50vw]"></div>
+<div class="orb bg-purple-600 bottom-[10%] right-[-10%] w-[40vw] h-[40vw]"></div>
+
+<main class="relative flex flex-col w-full overflow-x-hidden">
+
+    <!-- HERO SECTION -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20 relative overflow-hidden">
+        
+        <!-- Live Image Background mit Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- 
+               Wichtig: Stelle sicher, dass 'bg.jpg' unter static/images/bg.jpg liegt.
+               Die Klasse 'mix-blend-overlay' sorgt dafür, dass das Bild mit dem dunklen Hintergrund verschmilzt.
             -->
+            <img 
+                src="images/bg.jpg" 
+                alt="My Best Antic Live" 
+                class="w-full h-full object-cover opacity-40 mix-blend-overlay grayscale hover:grayscale-0 transition-all duration-[3s] scale-105"
+            />
+            <!-- Gradient Overlay für Lesbarkeit -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/30"></div>
         </div>
 
-        <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 items-center mx-auto"
-        >
-            <iframe
-                title="Spotify Player"
-                style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/7zhfeA51E1vBA6PiTmP8et?utm_source=generator"
-                width="250"
-                height="360"
-                frameBorder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-            >
-            </iframe>
-            <iframe
-                title="Spotify Player"
-                style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/4yfRbpAzcvHERqcvgB11Jz?utm_source=generator"
-                width="250"
-                height="360"
-                frameBorder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-            >
-            </iframe>
-            <iframe
-                title="Spotify Player"
-                style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/5lub0KpCOpCKeiviwZl9wd?utm_source=generator"
-                width="250"
-                height="352"
-                frameBorder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-            >
-            </iframe>
-        </div>
-
-        <!--
-            <h4 class="font-semibold text-xl sm:text-2xl md:text-3xl text-center">
-                Curious to <span class="poppins text-blue-400">hear</span> more?
-            </h4>
-            -->
-        <a
-            href="https://open.spotify.com/artist/69HQoBBRhfFiSVKpjxFOKZ?si=HyKK2pceQz-hRhgK2EA50Q"
-            target="_blank"
-            class="mx-auto px-4 py-2 rounded-md border border-solid border-white flex items-center gap-2 -mb-4 sm:-mb-0 -mt-10 hover:border-blue-400 duration-200"
-        >
-            <i class="fa-brands fa-spotify"></i>
-            <p>Listen on Spotify</p>
-        </a>
+        {#if mounted}
+            <div in:fly={{ y: 50, duration: 1000 }} class="z-10 flex flex-col items-center gap-6">
+                <h1 class="text-5xl sm:text-7xl md:text-9xl font-bold font-poppins tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-slate-400 drop-shadow-2xl">
+                    MY BEST ANTIC
+                </h1>
+                <p class="text-lg md:text-2xl font-light text-slate-200 tracking-widest uppercase text-shadow-lg">
+                    Pop-Punk / Post-Hardcore // Dresden
+                </p>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <a href="#music" class="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all hover:scale-105 shadow-[0_0_20px_rgba(37,99,235,0.5)]">
+                        Listen Now
+                    </a>
+                    <a href="#live" class="px-8 py-3 rounded-full border border-white/20 hover:bg-white/10 backdrop-blur-sm transition-all text-white">
+                        Tour Dates
+                    </a>
+                </div>
+            </div>
+        {/if}
     </section>
 
-    <section
-        id="live"
-        class="py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 my-auto"
-    >
-        <h3
-            class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
-        >
-            Live
-        </h3>
+    <!-- MUSIC SECTION -->
+    <section id="music" class="py-32 px-4 max-w-7xl mx-auto w-full relative z-10">
+        <div class="flex flex-col gap-12">
+            <h2 class="text-4xl md:text-6xl font-bold text-center uppercase tracking-tighter mb-8 text-white">
+                Latest <span class="text-blue-500">Music</span>
+            </h2>
 
-        <div class="w-full mx-auto max-w-[1400px] items-center">
-            <script
-                charset="utf-8"
-                src="https://widgetv3.bandsintown.com/main.min.js"
-            ></script>
-            <a
-                class="bit-widget-initializer"
-                href="/foo"
-                data-artist-name="id_10560649"
-                data-background-color="rgba(2,6,23,1)"
-                data-separator-color="rgba(159,159,159,1)"
-                data-text-color="rgba(255,255,255,1)"
-                data-font="Poppins"
-                data-auto-style="true"
-                data-button-label-capitalization="capitalize"
-                data-header-capitalization="undefined"
-                data-location-capitalization="capitalize"
-                data-venue-capitalization="capitalize"
-                data-local-dates-position=""
-                data-display-details="true"
-                data-display-lineup="true"
-                data-display-start-time="true"
-                data-social-share-icon="false"
-                data-display-limit="5"
-                data-date-format="MMM. DD YYYY"
-                data-date-orientation="vertical"
-                data-date-border-color="#4A4A4A"
-                data-date-border-width="0px"
-                data-date-capitalization="uppercase"
-                data-date-border-radius="200px"
-                data-event-ticket-cta-size="medium"
-                data-event-custom-ticket-text=""
-                data-event-ticket-text="TICKETS"
-                data-event-ticket-icon="true"
-                data-event-ticket-cta-text-color="#FFFFFF"
-                data-event-ticket-cta-bg-color="#1d4ed8"
-                data-event-ticket-cta-border-color="#4A4A4A"
-                data-event-ticket-cta-border-width="0px"
-                data-event-ticket-cta-border-radius="4px"
-                data-sold-out-button-text-color="#FFFFFF"
-                data-sold-out-button-background-color="#4A4A4A"
-                data-sold-out-button-border-color="#4A4A4A"
-                data-sold-out-button-clickable="true"
-                data-event-rsvp-position="left"
-                data-event-rsvp-cta-size="medium"
-                data-event-rsvp-only-show-icon="undefined"
-                data-event-rsvp-text="REMIND ME"
-                data-event-rsvp-icon=""
-                data-event-rsvp-cta-text-color="#4A4A4A"
-                data-event-rsvp-cta-bg-color="#FFFFFF"
-                data-event-rsvp-cta-border-color="#4A4A4A"
-                data-event-rsvp-cta-border-width="1px"
-                data-event-rsvp-cta-border-radius="4px"
-                data-follow-section-position="hidden"
-                data-follow-section-alignment="center"
-                data-follow-section-header-text="Get updates on new shows, new music, and more."
-                data-follow-section-cta-size="medium"
-                data-follow-section-cta-text="FOLLOW"
-                data-follow-section-cta-icon="true"
-                data-follow-section-cta-text-color="#FFFFFF"
-                data-follow-section-cta-bg-color="#4A4A4A"
-                data-follow-section-cta-border-color="#4A4A4A"
-                data-follow-section-cta-border-width="0px"
-                data-follow-section-cta-border-radius="4px"
-                data-play-my-city-position="hidden"
-                data-play-my-city-alignment="Center"
-                data-play-my-city-header-text="Don’t see a show near you?"
-                data-play-my-city-cta-size="medium"
-                data-play-my-city-cta-text="REQUEST A SHOW"
-                data-play-my-city-cta-icon="true"
-                data-play-my-city-cta-text-color="#FFFFFF"
-                data-play-my-city-cta-bg-color="#4A4A4A"
-                data-play-my-city-cta-border-color="#4A4A4A"
-                data-play-my-city-cta-border-width="0px"
-                data-play-my-city-cta-border-radius="4px"
-                data-optin-font=""
-                data-optin-text-color=""
-                data-optin-bg-color=""
-                data-optin-cta-text-color=""
-                data-optin-cta-bg-color=""
-                data-optin-cta-border-width=""
-                data-optin-cta-border-radius=""
-                data-optin-cta-border-color=""
-                data-language="en"
-                data-layout-breakpoint="900"
-                data-app-id=""
-                data-affil-code=""
-                data-bit-logo-position="hidden"
-                data-bit-logo-color="#CCCCCC"
-            ></a>
-        </div>
-    </section>
-
-    <!--
-    <section id="merch" class="py-20 lg:py-32 flex flex-col gap-20">
-        <h3
-            class="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center"
-        >
-            Merch
-        </h3>
-        <h6 class="text-center text-lg sm:text-2xl md:text-3xl leading-5">
-            Coming soon!
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10"></div>
-    </section>
-    -->
-
-    <section
-        id="about"
-        class="py-32 flex flex-col gap-14 sm:gap-20 md:gap-24 mx-auto w-full max-w-[1400px]"
-    >
-        <h3
-            class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
-        >
-            About
-        </h3>
-        <div
-            class="flex flex-col gap-4 relative before:absolute before:top-0 m-auto"
-        >
-            <h6 class="text-center sm:text-xl md:text-2xl leading-5">
-                Aufgewachsen in den goldenen Jahren des Pop-Punk und
-                Post-Hardcore haben My Best Antic ihre Liebe für kraftvolle und
-                emotionale Musik gefunden und seitdem nie verloren. Die vier
-                Jungs aus Dresden schreiben sich den Frust des Lebens mit
-                mitreißenden Gitarrenriffs, packenden Rhythmen und
-                melodisch-zweistimmigem Gesang von der Seele und erzeugen damit
-                einen Sound, der mal zum Tanzen und mal zum Nachdenken anregt.
-                „My Best Antic“ - eben die beste Posse des Quartetts - steckt
-                voller Zynismus, Kitsch, befreiender Wut und Hoffnung. Untermalt
-                von einer starken Liveperformance entsteht so eine Mischung, die
-                keine:n Konzertbesucher:in unberührt lässt.
-            </h6>
-        </div>
-    </section>
-
-    <section id="contact" class="py-32 flex flex-col gap-20">
-        <h3
-            class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center uppercase"
-        >
-            Contact
-        </h3>
-
-        <div class="flex items-start">
-            <div class="container mx-auto">
-                <div
-                    class="max-w-md mx-auto bg-gray-800 p-5 rounded-md shadow-sm"
-                >
-                    <div class="text-center">
-                        <p class="text-gray-600 dark:text-gray-400">
-                            Fill up the form below to send us a message.
-                        </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {#each spotifyLinks as link}
+                    <div class="group relative rounded-2xl overflow-hidden shadow-2xl bg-slate-900/50 border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-2">
+                        <iframe
+                            title="Spotify"
+                            style="border-radius:12px"
+                            src={link}
+                            width="100%"
+                            height="352"
+                            frameBorder="0"
+                            allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                            class="w-full"
+                        ></iframe>
                     </div>
-                    <div class="m-7">
-                        <form
-                            action="https://api.web3forms.com/submit"
-                            method="POST"
-                            id="form"
+                {/each}
+            </div>
+
+            <!-- Streaming Links Leiste -->
+            <div class="flex flex-col items-center gap-6 mt-12">
+                <p class="text-slate-400 uppercase tracking-widest text-sm">Stream us on</p>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                    {#each streamingLinks as service}
+                        <a 
+                            href={service.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="group flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors"
                         >
-                            <input
-                                type="hidden"
-                                name="access_key"
-                                value="6aa7cafe-bc6a-44d2-bca6-f43b47815c9e"
-                            />
-                            <input
-                                type="hidden"
-                                name="subject"
-                                value="New Submission from Web3Forms"
-                            />
-                            <input
-                                type="hidden"
-                                name="redirect"
-                                value="https://web3forms.com/success"
-                            />
-                            <input
-                                type="checkbox"
-                                name="botcheck"
-                                id=""
-                                style="display: none;"
-                            />
-                            <div class="mb-6">
-                                <label
-                                    for="name"
-                                    class="block mb-2 font-medium text-sm text-gray-600 dark:text-gray-400"
-                                    >Full Name</label
-                                >
-                                <input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    placeholder="John Dorian"
-                                    required
-                                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                                />
+                            <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-slate-900/80 border border-white/10 flex items-center justify-center group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300 shadow-lg">
+                                <i class="{service.icon} text-2xl md:text-3xl {service.color} transition-colors"></i>
                             </div>
-                            <div class="mb-6">
-                                <label
-                                    for="email"
-                                    class="block mb-2 font-medium text-sm text-gray-600 dark:text-gray-400"
-                                    >Email Address</label
-                                >
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    placeholder="your@email.com"
-                                    required
-                                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                                />
-                            </div>
-                            <div class="mb-6">
-                                <label
-                                    for="message"
-                                    class="block mb-2 font-medium text-sm text-gray-600 dark:text-gray-400"
-                                    >Your Message</label
-                                >
-
-                                <textarea
-                                    rows="5"
-                                    name="message"
-                                    id="message"
-                                    placeholder="Your Message"
-                                    class="w-full px-3 py-2 placeholder-gray-300 border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                                    required
-                                ></textarea>
-                            </div>
-                            <div class="mb-6">
-                                <button
-                                    type="submit"
-                                    class="w-full px-3 py-4 text-white bg-blue-700 rounded-md focus:bg-indigo-600 focus:outline-none"
-                                >
-                                    Send Message
-                                </button>
-                            </div>
-                            <p
-                                class="text-base text-center text-gray-400"
-                                id="result"
-                            ></p>
-                        </form>
-                    </div>
+                            <span class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity -translate-y-2 group-hover:translate-y-0">{service.name}</span>
+                        </a>
+                    {/each}
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- LIVE SECTION -->
+    <section id="live" class="py-32 bg-slate-950/50 border-y border-white/5 backdrop-blur-sm relative z-10">
+        <div class="max-w-5xl mx-auto px-4 w-full text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 uppercase tracking-tighter text-white">Live</h2>
+            
+            <div class="bg-slate-900/40 p-4 rounded-xl border border-white/5 min-h-[400px]">
+                <script charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
+                <a
+                    class="bit-widget-initializer"
+                    data-artist-name="id_10560649"
+                    data-background-color="rgba(0,0,0,0)"
+                    data-separator-color="rgba(255,255,255,0.1)"
+                    data-text-color="rgba(255,255,255,1)"
+                    data-font="Poppins"
+                    data-auto-style="true"
+                    data-button-label-capitalization="capitalize"
+                    data-location-capitalization="capitalize"
+                    data-venue-capitalization="capitalize"
+                    data-display-details="true"
+                    data-display-lineup="false"
+                    data-display-start-time="true"
+                    data-social-share-icon="false"
+                    data-display-limit="5"
+                    data-date-format="MMM DD, YYYY"
+                    data-date-orientation="horizontal"
+                    data-date-border-color="#4A4A4A"
+                    data-event-ticket-cta-size="medium"
+                    data-event-ticket-text="TICKETS"
+                    data-event-ticket-cta-bg-color="#2563eb"
+                    data-event-ticket-cta-text-color="#FFFFFF"
+                ></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-32 px-4 max-w-4xl mx-auto relative z-10">
+        <div class="relative bg-gradient-to-br from-slate-900/80 to-slate-900/40 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl backdrop-blur-md">
+            <i class="fas fa-quote-left absolute -top-6 -left-6 text-6xl text-blue-600/20"></i>
+            
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-center uppercase text-white">About Us</h2>
+            
+            <p class="text-lg md:text-xl text-slate-300 leading-relaxed text-justify hyphens-auto">
+                Aufgewachsen in den goldenen Jahren des Pop-Punk und Post-Hardcore haben <strong class="text-white">My Best Antic</strong> ihre Liebe für kraftvolle und emotionale Musik gefunden und seitdem nie verloren. Die vier Jungs aus Dresden schreiben sich den Frust des Lebens mit mitreißenden Gitarrenriffs, packenden Rhythmen und melodisch-zweistimmigem Gesang von der Seele und erzeugen damit einen Sound, der mal zum Tanzen und mal zum Nachdenken anregt. „My Best Antic“ - eben die beste Posse des Quartetts - steckt voller Zynismus, Kitsch, befreiender Wut und Hoffnung.
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION (E-Mail only) -->
+    <section id="contact" class="py-32 px-4 mb-20 relative z-10">
+        <div class="max-w-2xl mx-auto w-full text-center flex flex-col items-center gap-10">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 uppercase text-white">Contact</h2>
+            
+            <p class="text-slate-400 text-lg md:text-xl max-w-lg">
+                Booking, Fragen oder einfach nur "Was geht" sagen? <br>
+                Schreib uns direkt eine Mail.
+            </p>
+
+            <a 
+                href="mailto:mybestantic@gmail.com"
+                class="group relative inline-flex items-center justify-center gap-4 px-10 py-6 bg-slate-900 border border-white/10 rounded-2xl hover:border-blue-500 hover:bg-slate-800 transition-all duration-300 shadow-2xl hover:shadow-[0_0_30px_rgba(37,99,235,0.2)]"
+            >
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl group-hover:scale-110 transition-transform">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="text-left">
+                    <span class="block text-xs text-slate-400 uppercase tracking-wider">Email us at</span>
+                    <span class="block text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">mybestantic@gmail.com</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
 </main>

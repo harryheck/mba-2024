@@ -1,14 +1,25 @@
 <script>
     export let y;
+    import { fly, slide } from 'svelte/transition';
+
+    let isMenuOpen = false;
 
     let tabs = [
         { name: "Music", link: "#music" },
         { name: "Live", link: "#live" },
         { name: "About", link: "#about" },
         { name: "Contact", link: "#contact" },
-        //{name: 'Merch', link: '#merch'}
-        //{name: 'Blog', link: '#blog'}
     ];
+
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+    }
+
+    function scrollToSection(link) {
+        isMenuOpen = false;
+        const target = document.querySelector(link);
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+    }
 
     function goTop() {
         document.body.scrollIntoView({ behavior: "smooth" });
@@ -16,72 +27,66 @@
 </script>
 
 <header
-    class={"sticky z-[10] top-0 duration-300 px-3 md:px-6 flex w-auto " +
-        (y > 0
-            ? "py-4 bg-gray-950 bg-opacity-75 border-transparent"
-            : "py-4 bg-gray-950 bg-opacity-50 border-transparent")}
+    class={"fixed top-0 w-full z-50 transition-all duration-300 border-b border-white/5 backdrop-blur-md " +
+        (y > 50 ? "bg-slate-950/80 py-3" : "bg-transparent py-5")}
 >
-    <button
-        on:click={goTop}
-        class="font-poppins text-xl md:text-2xl uppercase duration-200 hover:text-blue-400"
-    >
-        <b>My Best Antic</b>
-    </button>
-
-    <div
-        class="hidden md:grid md:grid-cols-4 ml-auto place-items-center gap-0 md:gap-2 lg:gap-5 font-semibold sm:text-sm md:text-sm"
-    >
-        <a
-            href="https://www.instagram.com/mybestantic/"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <!-- Logo -->
+        <button
+            on:click={goTop}
+            class="font-poppins text-xl md:text-2xl font-bold tracking-tighter uppercase hover:text-blue-500 transition-colors"
         >
-            <i class="fab fa-instagram fa-2x hover:text-pink-400 duration-200"
-            ></i>
-        </a>
+            My Best Antic
+        </button>
 
-        <a
-            href="https://www.youtube.com/@mybestantic"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <i class="fab fa-youtube fa-2x hover:text-red-400 duration-200"></i>
-        </a>
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+            {#each tabs as tab}
+                <a
+                    href={tab.link}
+                    on:click|preventDefault={() => scrollToSection(tab.link)}
+                    class="text-sm font-medium uppercase tracking-widest hover:text-blue-400 transition-colors relative group"
+                >
+                    {tab.name}
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full"></span>
+                </a>
+            {/each}
+            
+            <!-- Social Icons Mini (Desktop) -->
+            <div class="flex items-center gap-4 ml-4 border-l border-white/10 pl-4 text-slate-400">
+                <a href="https://www.instagram.com/mybestantic/" target="_blank" class="hover:text-pink-500 transition-colors"><i class="fab fa-instagram text-lg"></i></a>
+                <a href="https://www.youtube.com/@mybestantic" target="_blank" class="hover:text-red-500 transition-colors"><i class="fab fa-youtube text-lg"></i></a>
+            </div>
+        </nav>
 
-        <a
-            href="https://www.threads.net/@mybestantic"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <i class="fab fa-threads fa-2x hover:text-gray-400 duration-200"
-            ></i>
-        </a>
-
-        <a
-            href="https://www.facebook.com/mybestantic"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <i class="fab fa-facebook fa-2x hover:text-blue-400 duration-200"
-            ></i>
-        </a>
+        <!-- Mobile Menu Button -->
+        <button on:click={toggleMenu} class="md:hidden text-2xl focus:outline-none">
+            <i class="fas {isMenuOpen ? 'fa-times' : 'fa-bars'}"></i>
+        </button>
     </div>
 
-    <div
-        class="font-poppins sm:flex ml-auto items-center gap-4 font-semibold md:text-xl  uppercase"
-    >
-        {#each tabs as tab, index}
-            <a
-                href={tab.link}
-                on:click={(event) => {
-                    event.preventDefault();
-                    const target = document.querySelector(tab.link);
-                    target.scrollIntoView({ behavior: "smooth" });
-                }}
-                class="duration-200 hover:text-blue-400"
-            >
-                <p>{tab.name}</p>
-            </a>
-        {/each}
-    </div>
+    <!-- Mobile Nav -->
+    {#if isMenuOpen}
+        <div 
+            transition:slide 
+            class="md:hidden absolute top-full left-0 w-full bg-slate-950/95 border-b border-white/10 backdrop-blur-xl shadow-2xl"
+        >
+            <div class="flex flex-col p-6 gap-6 items-center">
+                {#each tabs as tab}
+                    <a
+                        href={tab.link}
+                        on:click|preventDefault={() => scrollToSection(tab.link)}
+                        class="text-xl font-bold uppercase tracking-widest hover:text-blue-400"
+                    >
+                        {tab.name}
+                    </a>
+                {/each}
+                <div class="flex gap-6 mt-4 text-slate-400">
+                    <a href="https://www.instagram.com/mybestantic/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.youtube.com/@mybestantic" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
+                    <a href="https://www.facebook.com/mybestantic" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    {/if}
 </header>
