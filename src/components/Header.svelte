@@ -82,9 +82,9 @@
                     </a>
                 {/each}
                 <div class="flex gap-6 mt-4 text-slate-400">
-                    <a href="https://www.instagram.com/mybestantic/" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
-                    <a href="https://www.youtube.com/@mybestantic" target="_blank"><i class="fab fa-youtube fa-2x"></i></a>
-                    <a href="https://www.facebook.com/mybestantic" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://www.instagram.com/mybestantic/" target="_blank" class="hover:text-pink-500 transition-colors"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.youtube.com/@mybestantic" target="_blank" class="hover:text-red-500 transition-colors"><i class="fab fa-youtube fa-2x"></i></a>
+                    <a href="https://www.facebook.com/mybestantic" target="_blank" class="hover:text-blue-500 transition-colors"><i class="fab fa-facebook fa-2x"></i></a>
                 </div>
             </div>
         </div>

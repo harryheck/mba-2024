@@ -91,16 +91,16 @@
                 <p class="text-slate-400 uppercase tracking-widest text-sm">Stream us on</p>
                 <div class="flex flex-wrap justify-center gap-6 md:gap-10">
                     {#each streamingLinks as service}
-                        <a 
-                            href={service.url} 
-                            target="_blank" 
+                        <a
+                            href={service.url}
+                            target="_blank"
                             rel="noopener noreferrer"
-                            class="group flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors"
+                            class="group relative flex flex-col items-center text-slate-400 hover:text-white transition-colors"
                         >
                             <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-slate-900/80 border border-white/10 flex items-center justify-center group-hover:border-blue-500/50 group-hover:scale-110 transition-all duration-300 shadow-lg">
                                 <i class="{service.icon} text-2xl md:text-3xl {service.color} transition-colors"></i>
                             </div>
-                            <span class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity -translate-y-2 group-hover:translate-y-0">{service.name}</span>
+                            <span class="absolute top-full mt-1 text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity -translate-y-2 group-hover:translate-y-0">{service.name}</span>
                         </a>
                     {/each}
                 </div>
